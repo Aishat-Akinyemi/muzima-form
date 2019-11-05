@@ -60,7 +60,6 @@
         <input class="form-control" id="patient.birth_date" name="patient.birth_date" type="text"
                readonly="readonly" value="">
     </div>
-</div>
 <div class="section">
     <h3>Encounter Details</h3>
 
@@ -106,12 +105,12 @@
 
 <div class="section">
     <h4> Early Symptoms/Signs of Hypertension<span class="required">*</span></h4>
-    <fieldset name="1728^SIGN - HYPERTENSION^99DCT"></fieldset>
+    <fieldset name="1728^SIGN HYPERTENSION^99DCT">
     <div class="form-group">
     <div class="form-group">
             <label class="font-normal">
                 <input id="sign.severe_headache" type="checkbox"
-                        data-concept="1728^SIGN - HYPERTENSION^99DCT"
+                        data-concept="1728^SIGN HYPERTENSION^99DCT"
                         value="139081^SEVERE HEADACHE^99DCT">
                 Severe headache
             </label>
@@ -119,7 +118,7 @@
         <div class="form-group">
             <label class="font-normal">
                 <input id="sign.fatigue" type="checkbox"
-                        data-concept="1728^SIGN - HYPERTENSION^99DCT"
+                        data-concept="1728^SIGN HYPERTENSION^99DCT"
                         value="140501^FATIGUE^99DCT">
                 Fatigue
             </label>
@@ -127,7 +126,7 @@
         <div class="form-group">
             <label class="font-normal">
                 <input id="sign.vision problem" type="checkbox"
-                        data-concept="1728^SIGN - HYPERTENSION^99DCT"
+                        data-concept="1728^SIGN HYPERTENSION^99DCT"
                         value="118938^VISION PROBLEM^99DCT">
                 Vision problems
             </label>
@@ -135,7 +134,7 @@
         <div class="form-group">
                 <label class="font-normal">
                     <input id="sign.chest_pain" type="checkbox"
-                            data-concept="1728^SIGN - HYPERTENSION^99DCT"
+                            data-concept="1728^SIGN HYPERTENSION^99DCT"
                             value="120749^CHEST PAIN^99DCT">
                     Chest pain
                 </label>
@@ -143,7 +142,7 @@
         <div class="form-group">
             <label class="font-normal">
                 <input id="sign.vaginal_bleeding" type="checkbox"
-                        data-concept="1728^SIGN - HYPERTENSION^99DCT"
+                        data-concept="1728^SIGN HYPERTENSION^99DCT"
                         value="136201^LABORED BREATHING^99DCT">
                 Labored breathing
             </label>
@@ -151,7 +150,7 @@
         <div class="form-group">
             <label class="font-normal">
                 <input id="sign.Hematuria" type="checkbox"
-                        data-concept="1728^SIGN - HYPERTENSION^99DCT"
+                        data-concept="1728^SIGN HYPERTENSION^99DCT"
                         value="840^HEMATURIA^99DCT">
                 Bloody urine
             </label>
@@ -159,16 +158,15 @@
         <div class="form-group">
             <label class="font-normal">
                 <input id="sign.none" type="checkbox"
-                        data-concept="1728^SIGN - HYPERTENSION^99DCT"
+                        data-concept="1728^SIGN HYPERTENSION^99DCT"
                         value="1107^NONE^99DCT">
                 None
-            </label>
+                       </label>
         </div>
-                    
-    </div> 
-</div>
-
-
+    </fieldset>    
+</div>  
+</form>
+</body>
 
 <script type="text/javascript">
 
@@ -179,7 +177,12 @@ $(document).ready(function () {
     document.setupValidationForLocation($('#encounter\\.location_id').val(),$("encounter\\.location_id"));
 
     const formId = "basic_encounter_form_with_at_least_6_early_signs_for_hypertension";
-
+   
+        var symptomValue = ["1107^NONE^99DCT"],
+            symptomMessage = "None should be the only option, when selected";
+        $(':checkbox[data-concept="1728^SIGN HYPERTENSION^99DCT"]').change(function (){
+        showValidationMessages(validateAlone($(this), symptomValue, symptomMessage));
+    });
 
     $('#save_draft').click(function () {
         $(this).prop('disabled', true);
